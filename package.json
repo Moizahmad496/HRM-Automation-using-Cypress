@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cypress run",
+    "cy:run": "cypress run --spec 'cypress/e2e/login.cy.js' --record false --browser chrome --headless"
   },
   "keywords": [],
   "author": "",
