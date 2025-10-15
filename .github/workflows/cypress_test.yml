@@ -30,7 +30,7 @@ jobs:
 
       # Step 4: Run Cypress tests
       - name: Run Cypress tests
-        run: npx cypress run --spec "cypress/e2e/login.cy.js" --record false --browser electron --headless
+        run: npx cypress run --spec "cypress/e2e/login.cy.js" --record false --browser chrome --headless
         env:
           CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
  
