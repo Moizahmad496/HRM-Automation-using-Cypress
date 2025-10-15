@@ -29,7 +29,9 @@ jobs:
 
       # Step 4: Run Cypress tests
       - name: Run Cypress tests
-        run: npx cypress run --spec "cypress/e2e/login.cy.js"
+        run: |
+          chmod +x node_modules/.bin/cypress
+          npm run cy:run
 
       # (Optional) Upload screenshots if tests fail
       - name: Upload Cypress screenshots
