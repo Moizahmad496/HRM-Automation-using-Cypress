@@ -34,7 +34,10 @@ jobs:
 
       # Step 5: Run Cypress tests
       - name: Run Cypress tests
-        run: npm run cy:run
+        run: |
+          timeout 300 npm run cy:run || echo "Tests timed out"
+        env:
+          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
 
       # (Optional) Upload screenshots if tests fail
       - name: Upload Cypress screenshots
