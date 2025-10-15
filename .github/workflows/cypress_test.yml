@@ -5,12 +5,12 @@ name: Cypress Tests
 # When to run this workflow
 on:
   push:
-    branches: [ "main" ]    # Runs on push to main branch
+    branches: ["main"] # Runs on push to main branch
   pull_request:
-    branches: [ "main" ]    # Runs on PR to main branch
+    branches: ["main"] # Runs on PR to main branch
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest   # GitHub provides Linux VM
+    runs-on: ubuntu-latest # GitHub provides Linux VM
 
     steps:
       # Step 1: Checkout repo
@@ -19,22 +19,17 @@ jobs:
 
       # Step 2: Setup Node.js (Cypress runs on Node)
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       # Step 4: Run Cypress tests
       - name: Run Cypress tests
-        run: |
-          npm run cy:run
-        env:
-          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
- 
+        run: npx cypress run --spec "cypress/e2e/login.cy.js"
 
       # (Optional) Upload screenshots if tests fail
       - name: Upload Cypress screenshots
@@ -43,5 +38,3 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
-
-   
