@@ -15,23 +15,26 @@ jobs:
     steps:
       # Step 1: Checkout repo
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Step 2: Setup Node.js (Cypress runs on Node)
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: 'npm'
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      # Step 4: Run Cypress tests
+      # Step 4: Install Cypress binary
+      - name: Install Cypress
+        run: npx cypress install
+
+      # Step 5: Run Cypress tests
       - name: Run Cypress tests
-        run: |
-          chmod +x node_modules/.bin/cypress
-          npm run cy:run
+        run: npm run cy:run
 
       # (Optional) Upload screenshots if tests fail
       - name: Upload Cypress screenshots
