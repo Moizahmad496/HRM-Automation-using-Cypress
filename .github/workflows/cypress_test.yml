@@ -19,17 +19,20 @@ jobs:
 
       # Step 2: Setup Node.js (Cypress runs on Node)
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
+          cache: 'npm'
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       # Step 4: Run Cypress tests
       - name: Run Cypress tests
         run: npx cypress run --spec "cypress/e2e/login.cy.js"
+        env:
+          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
  
 
       # (Optional) Upload screenshots if tests fail
