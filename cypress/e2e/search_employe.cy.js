@@ -27,7 +27,7 @@ describe("OrangeHRM PIM Scenarios", () => {
     cy.get(".oxd-autocomplete-dropdown").should("be.visible");
     cy.contains(".oxd-autocomplete-dropdown div", "Smith").click();
     //Select Job Title
-    cy.get(".oxd-icon.bi-caret-down-fill").eq(3).click({ force: true });
+    cy.get(".oxd-icon.bi-caret-down-fill").eq(3)({ force: true });
     cy.contains(".oxd-select-dropdown div", "Finance").click();
     //Select Sub Unit
     cy.get(".oxd-icon.bi-caret-down-fill").eq(4).click({ force: true });
