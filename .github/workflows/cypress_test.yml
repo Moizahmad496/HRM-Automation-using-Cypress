@@ -36,11 +36,22 @@ jobs:
       - name: Run Cypress tests
         run: timeout 300 npm run cy:run
         env:
-          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress 
+          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
+
+      # Step 6: Check for screenshots
+      - name: Check for screenshots
+        id: check-screenshots
+        if: failure()
+        run: |
+          if [ -d cypress/screenshots ] && [ "$(ls -A cypress/screenshots)" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
 
       # (Optional) Upload screenshots if tests fail
       - name: Upload Cypress screenshots
-        if: failure()
+        if: failure() && steps.check-screenshots.outputs.exists == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: cypress-screenshots
