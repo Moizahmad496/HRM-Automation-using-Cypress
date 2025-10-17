@@ -16,9 +16,11 @@ describe("OrangeHRM PIM Scenarios", () => {
     cy.url().should("include", "/pim/viewEmployeeList");
 
     // Search Employee by Information
-    cy.get('input[placeholder="Type for hints..."]').first().type("Testing the applicatio ");
+    cy.get('input[placeholder="Type for hints..."]')
+      .first()
+      .type("Testing the applicatio ");
     cy.get(".oxd-select-text-input").first().click();
-    cy.contains(".oxd-select-option", "Full-Time Permanent").click(); 
+    cy.contains(".oxd-select-option", "Full-Time Permanent").click();
     //Choosing the include field
     cy.get(".oxd-select-wrapper").eq(1).click();
     cy.contains(".oxd-select-option", "Current Employees Only").click();
@@ -27,15 +29,14 @@ describe("OrangeHRM PIM Scenarios", () => {
     cy.get(".oxd-autocomplete-dropdown").should("be.visible");
     cy.contains(".oxd-autocomplete-dropdown div", "Smith").click();
     //Select Job Title
-    cy.get(".oxd-icon.bi-caret-down-fill").eq(3)({ force: true });
+    cy.get(".oxd-icon.bi-caret-down-fill").eq(3).click({ force: true });
     cy.contains(".oxd-select-dropdown div", "Finance").click();
     //Select Sub Unit
     cy.get(".oxd-icon.bi-caret-down-fill").eq(4).click({ force: true });
     cy.contains(".oxd-select-dropdown div", "Quality Assurance").click();
     //Click Search Button
     cy.get("button").contains("Search").click();
-      //Click Reset Button
-      cy.get("button").contains("Reset").click();
-
+    //Click Reset Button
+    cy.get("button").contains("Reset").click();
   });
 });

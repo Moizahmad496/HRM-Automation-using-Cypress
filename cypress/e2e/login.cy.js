@@ -38,7 +38,7 @@ describe("OrangeHRM Login Scenarios", () => {
   });
 
   it("should show error for invalid password", () => {
-    cy.get('input[name="username"]').type("Admin");
+    cy.get('input[name="username"]')("Admin");
     cy.get('input[name="password"]').type("wrongpassword");
     cy.get("button").contains("Login").click();
     cy.get(".oxd-alert-content-text").should(
