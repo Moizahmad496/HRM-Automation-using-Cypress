@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cypress run",
-    "cy:run": "cypress run --spec 'cypress/e2e/login.cy.js' --record false --browser chrome --headless --timeout 60000"
+    "cy:run": "cypress run --spec 'cypress/e2e/login.cy.js' --record false --browser chrome --headless"
   },
   "keywords": [],
   "author": "",
