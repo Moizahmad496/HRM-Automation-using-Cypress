@@ -24,16 +24,16 @@ describe("OrangeHRM PIM Scenarios", () => {
     //Choosing the include field
     cy.get(".oxd-select-wrapper").eq(1).click();
     cy.contains(".oxd-select-option", "Current Employees Only").click();
-    cy.get('input[placeholder="Type for hints..."]').eq(1).type("Smith");
+    cy.get('input[placeholder="Type for hints..."]').eq(1).type("John");
     // Step 2: Wait for the suggestion list to appear and select the specific option
     cy.get(".oxd-autocomplete-dropdown").should("be.visible");
-    cy.contains(".oxd-autocomplete-dropdown div", "Smith").click();
+    cy.contains(".oxd-autocomplete-dropdown div", "John").click();
     //Select Job Title
     cy.get(".oxd-icon.bi-caret-down-fill").eq(3).click({ force: true });
     cy.contains(".oxd-select-dropdown div", "Finance").click();
     //Select Sub Unit
     cy.get(".oxd-icon.bi-caret-down-fill").eq(4).click({ force: true });
-    cy.contains(".oxd-select-dropdown div", "Quality Assurance").click();
+    cy.contains(".oxd-select-dropdown div", "Quality Assurance").click(); // Change the status to "Quality Assurance"
     //Click Search Button
     cy.get("button").contains("Search").click();
     //Click Reset Button

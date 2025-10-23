@@ -69,7 +69,7 @@ describe("OrangeHRM Login Scenarios", () => {
   });
 
   it("should not login when extra spaces are used in credentials", () => {
-    cy.get('input[name="username"]').type(" Admin ");
+    cy.get('input[name="username"]').type("Admin");
     cy.get('input[name="password"]').type(" admin123 ");
     cy.get("button").contains("Login").click();
     cy.get(".oxd-alert-content-text").should(

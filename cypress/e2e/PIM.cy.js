@@ -32,7 +32,6 @@ describe("OrangeHRM PIM Scenarios", () => {
 
     // Click Save button
     cy.contains("button", "Save").click();
-    
 
     // Confirm we’re redirected to personal details page
     cy.url().should("include", "/pim/viewPersonalDetails");
