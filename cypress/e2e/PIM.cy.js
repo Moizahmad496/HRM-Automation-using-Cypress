@@ -26,7 +26,7 @@ describe("OrangeHRM PIM Scenarios", () => {
     cy.get('input[name="lastName"]').type("Demo");
 
     //  Upload employee image (even if hidden)
-    cy.get('input[type="file"]', { timeout: 10000 })
+    cy.get('input[type="file"]', { timeout: 1000 })
       .should("exist")
       .attachFile("employe.jpg", { force: true });
 
