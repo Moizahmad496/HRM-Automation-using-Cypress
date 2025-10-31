@@ -11,6 +11,7 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest # GitHub provides Linux VM
+    timeout-minutes: 10
 
     steps:
       # Step 1: Checkout repo
@@ -34,7 +35,7 @@ jobs:
 
       # Step 5: Run Cypress tests
       - name: Run Cypress tests
-        run: npm run cy:run
+        run: npx cypress run --browser electron --headless
         env:
           CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
 
