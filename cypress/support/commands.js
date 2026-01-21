@@ -25,3 +25,19 @@ import "cypress-file-upload";
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+// Custom command for OrangeHRM login
+Cypress.Commands.add('login', (username, password) => {
+    // Visit the login page
+    cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+
+    // Enter credentials
+    cy.get('input[name="username"]').type(username);
+    cy.get('input[name="password"]').type(password);
+
+    // Click login button
+    cy.get("button").contains("Login").click();
+
+    // Verify redirect to dashboard
+    cy.url().should("include", "/dashboard");
+});

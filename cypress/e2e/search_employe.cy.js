@@ -1,42 +1,35 @@
 describe("OrangeHRM PIM Scenarios", () => {
   beforeEach(() => {
-    cy.visit(
-      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
-    );
-
-    cy.get('input[name="username"]').type("Admin");
-    cy.get('input[name="password"]').type("admin123");
-    cy.get("button").contains("Login").click();
-
-    cy.url().should("include", "/dashboard");
+    // Use custom login command
+    cy.login("Admin", "admin123");
   });
 
-  it("should navigate to PIM module and add employee with photo", () => {
+  it("should navigate to PIM module and search for added employee", () => {
     cy.get(".oxd-main-menu-item").contains("PIM").click();
     cy.url().should("include", "/pim/viewEmployeeList");
 
-    // Search Employee by Information
-    cy.get('input[placeholder="Type for hints..."]')
-      .first()
-      .type("Testing the applicatio ");
-    cy.get(".oxd-select-text-input").first().click();
-    cy.contains(".oxd-select-option", "Full-Time Permanent").click();
-    //Choosing the include field
-    cy.get(".oxd-select-wrapper").eq(1).click();
-    cy.contains(".oxd-select-option", "Current Employees Only").click();
-    cy.get('input[placeholder="Type for hints..."]').eq(1).type("John");
-    // Step 2: Wait for the suggestion list to appear and select the specific option
+    // Search Employee by Name - Search for "Test User Demo" employee
+    cy.get('input[placeholder="Type for hints..."]').first().type("Test");
+
+    // Wait for the suggestion list to appear and select the employee
     cy.get(".oxd-autocomplete-dropdown").should("be.visible");
-    cy.contains(".oxd-autocomplete-dropdown div", "John").click();
-    //Select Job Title
-    cy.get(".oxd-icon.bi-caret-down-fill").eq(3).click({ force: true });
-    cy.contains(".oxd-select-dropdown div", "Finance").click();
-    //Select Sub Unit
-    cy.get(".oxd-icon.bi-caret-down-fill").eq(4).click({ force: true });
-    cy.contains(".oxd-select-dropdown div", "Quality Assurance").click(); // Change the status to "Quality Assurance"
-    //Click Search Button
+    cy.contains(".oxd-autocomplete-dropdown div", "Test User Demo").click();
+
+    // Click Search Button
     cy.get("button").contains("Search").click();
-    //Click Reset Button
-    cy.get("button").contains("Reset").click();
+
+    // Verify search results contain the employee
+    cy.get(".oxd-table-body").should("be.visible");
+    // Validate that the table row contains the employee data
+    // Since first name and last name are in separate cells, check the entire row
+    cy.get(".oxd-table-body .oxd-table-row").first().within(() => {
+      cy.contains("Test User").should("exist"); // First name + Middle name
+      cy.contains("Demo").should("exist"); // Last name
+      cy.get('button.oxd-icon-button').click();
+    });
+
+    // Click Reset Button to clear the search
+    // cy.get("button").contains("Reset").click();
   });
 });
+

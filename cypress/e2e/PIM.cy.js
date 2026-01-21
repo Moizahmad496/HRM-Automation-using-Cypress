@@ -2,15 +2,8 @@ import "cypress-file-upload";
 
 describe("OrangeHRM PIM Scenarios", () => {
   beforeEach(() => {
-    cy.visit(
-      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
-    );
-
-    cy.get('input[name="username"]').type("Admin");
-    cy.get('input[name="password"]').type("admin123");
-    cy.get("button").contains("Login").click();
-
-    cy.url().should("include", "/dashboard");
+    // Use custom login command
+    cy.login("Admin", "admin123");
   });
 
   it("should navigate to PIM module and add employee with photo", () => {

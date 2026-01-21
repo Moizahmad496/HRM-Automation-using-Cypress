@@ -1,18 +1,8 @@
 //Positive Test Case: Verify that a user can sign in successfully with valid credentials.
 describe("Sign In Form", () => {
   it("should allow user to sign in successfully", () => {
-    // Step 1: Visit the Medplum login page
-    cy.visit(
-      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
-    );
-
-    // Step 2: Enter Credentials
-    cy.get('input[name="username"]').type("Admin");
-    cy.get('input[name="password"]').type("admin123");
-
-    // Step 4: Click Sign In button
-    cy.get("button").contains("Login").click();
-    cy.url().should("include", "/dashboard");
+    // Use custom login command
+    cy.login("Admin", "admin123");
   });
 });
 
@@ -20,9 +10,7 @@ describe("Sign In Form", () => {
 
 describe("OrangeHRM Login Scenarios", () => {
   beforeEach(() => {
-    cy.visit(
-      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
-    );
+    cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
   });
 
   // ❌ NEGATIVE TEST CASES BELOW
