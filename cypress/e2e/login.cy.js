@@ -10,7 +10,7 @@ describe("Sign In Form", () => {
 
 describe("OrangeHRM Login Scenarios", () => {
   beforeEach(() => {
-    cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+    cy.visit("/web/index.php/auth/login");
   });
 
   // ❌ NEGATIVE TEST CASES BELOW

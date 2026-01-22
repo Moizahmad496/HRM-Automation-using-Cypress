@@ -29,7 +29,7 @@ import "cypress-file-upload";
 // Custom command for OrangeHRM login
 Cypress.Commands.add('login', (username, password) => {
     // Visit the login page
-    cy.visit("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+    cy.visit("/web/index.php/auth/login");
 
     // Enter credentials
     cy.get('input[name="username"]').type(username);
