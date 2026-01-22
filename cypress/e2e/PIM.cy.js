@@ -11,7 +11,6 @@ describe("OrangeHRM PIM Scenarios", () => {
     cy.url().should("include", "/pim/viewEmployeeList");
 
     cy.contains("button", "Add").click();
-    cy.wait(1000);
     cy.url().should("include", "/addEmployee");
 
     cy.get('input[name="firstName"]').type("Test");
