@@ -11,7 +11,7 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest # GitHub provides Linux VM
-    timeout-minutes: 15
+    timeout-minutes: 10
 
     steps:
       # Step 1: Checkout repo
@@ -29,21 +29,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Step 4: Install Chrome browser
-      - name: Install Chrome
-        run: |
-          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-          echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google.list
-          apt-get update
-          apt-get install -y google-chrome-stable
-
-      # Step 5: Install Cypress binary
+      # Step 4: Install Cypress binary
       - name: Install Cypress
         run: npx cypress install
 
-      # Step 6: Run Cypress tests
+      # Step 5: Run Cypress tests
       - name: Run Cypress tests
-        run: npx cypress run --browser chrome --headless
+        run: npx cypress run --browser electron --headless
         env:
           CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
 
