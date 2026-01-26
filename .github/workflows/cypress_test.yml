@@ -37,7 +37,7 @@ jobs:
       - name: Run Cypress tests
         run: npx cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
         env:
-          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
+          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress 
 
       # Step 6: Check for screenshots
       - name: Check for screenshots
