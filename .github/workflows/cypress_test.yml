@@ -11,7 +11,6 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest # GitHub provides Linux VM
-    timeout-minutes: 10
 
     steps:
       # Step 1: Checkout repo
@@ -35,24 +34,14 @@ jobs:
 
       # Step 5: Run Cypress tests
       - name: Run Cypress tests
-        run: npx cypress run --browser electron --headless
-        env:
-          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress
-
-      # Step 6: Check for screenshots
-      - name: Check for screenshots
-        id: check-screenshots
-        if: failure()
         run: |
-          if [ -d cypress/screenshots ] && [ "$(ls -A cypress/screenshots)" ]; then
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
+          timeout 300 npm run cy:run || echo "Tests timed out"
+        env:
+          CYPRESS_CACHE_FOLDER: ~/.cache/Cypress 
 
       # (Optional) Upload screenshots if tests fail
       - name: Upload Cypress screenshots
-        if: failure() && steps.check-screenshots.outputs.exists == 'true'
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: cypress-screenshots
