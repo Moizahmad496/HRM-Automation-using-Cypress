@@ -3,6 +3,8 @@ describe("Sign In Form", () => {
   it("should allow user to sign in successfully", () => {
     // Use custom login command
     cy.login("Admin", "admin123");
+    cy.allure().severity("critical");
+
   });
 });
 
