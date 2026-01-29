@@ -13,7 +13,7 @@ describe("OrangeHRM PIM Scenarios", () => {
 
     // Wait for the suggestion list to appear and select the employee
     cy.get(".oxd-autocomplete-dropdown").should("be.visible");
-    cy.contains(".oxd-autocomplete-dropdown div", "test test test").click();
+    cy.contains(".oxd-autocomplete-dropdown div", "sww test").click();
 
     // Click Search Button
     cy.get("button").contains("Search").click();
@@ -23,7 +23,7 @@ describe("OrangeHRM PIM Scenarios", () => {
     // Validate that the table row contains the employee data
     // Since first name and last name are in separate cells, check the entire row
     cy.get(".oxd-table-body .oxd-table-row").first().within(() => {
-      cy.contains("test test").should("exist"); // First name + Middle name
+      cy.contains("sww").should("exist"); // First name + Middle name
       cy.contains("test").should("exist"); // Last name
       // cy.get('button.oxd-icon-button').click(); //edit Button
     });

@@ -16,10 +16,16 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // Mochawesome plugin
       require("cypress-mochawesome-reporter/plugin")(on);
+      // Allure plugin
+      require('@shelex/cypress-allure-plugin/writer')(on, config);
       return config;
     },
     specPattern: "cypress/e2e/**/*.cy.js",
     baseUrl: "https://opensource-demo.orangehrmlive.com",
+    env: {
+      allure: true,
+      allureResultsPath: "allure-results"
+    }
   },
 
   // Timeouts
