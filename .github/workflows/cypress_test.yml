@@ -46,3 +46,22 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+
+# API Tests (Run Newman API collection)
+          api-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run API tests with Newman
+        run: newman run Postman/JSONPlaceholder_Tests.json 
