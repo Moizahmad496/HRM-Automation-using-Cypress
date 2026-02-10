@@ -28,6 +28,7 @@ describe("OrangeHRM Login Scenarios", () => {
   });
 
   it("should show error for invalid password", () => {
+    cy.allure().severity("critical");
     cy.get('input[name="username"]').type("Admin");
     cy.get('input[name="password"]').type("wrongpassword");
     cy.get("button").contains("Login").click();
@@ -38,6 +39,7 @@ describe("OrangeHRM Login Scenarios", () => {
   });
 
   it("should show validation for empty username and password", () => {
+    cy.allure().severity("critical");
     cy.get("button").contains("Login").click();
     cy.get(".oxd-input-field-error-message")
       .should("contain.text", "Required")
@@ -45,6 +47,7 @@ describe("OrangeHRM Login Scenarios", () => {
   });
 
   it("should show validation for empty username only", () => {
+    cy.allure().severity("critical");
     cy.get('input[name="password"]').type("admin123");
     cy.get("button").contains("Login").click();
     cy.get(".oxd-input-field-error-message")
