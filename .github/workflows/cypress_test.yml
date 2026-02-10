@@ -47,9 +47,9 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
 
-# API Tests (Run Newman API collection)
-          api-tests:
-    # runs-on: ubuntu-latest
+  # API Tests (Run Newman API collection)
+  api-tests:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -64,4 +64,4 @@ jobs:
         run: npm install -g newman
 
       - name: Run API tests with Newman
-        run: newman run Postman/JSONPlaceholder_Tests.json 
+        run: newman run .github/workflows/Postman/JSONPlaceholder_Tests.json
